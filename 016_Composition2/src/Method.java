@@ -23,7 +23,7 @@ public class Method {
 
   // Methods
   public String composeMethod() {
-    return accessModifier + isStatic() + " " + returnType + " " + name + " " + params.composeParams() + " { "
+    return accessModifier + isStatic() + " " + returnType + " " + name + params.composeParams() + " { "
         + statements.getStatement() + " }";
   }
 

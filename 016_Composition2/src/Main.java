@@ -7,7 +7,8 @@ public class Main {
     Statement stuff = new Statement("return number + 2;");
     Parameter params = new Parameter("int", "number");
     Method method = new Method("private", false, "int", "add", params, stuff);
-
-    System.out.println(method.composeMethod());
+    MainMethod mainmethod = new MainMethod(stuff);
+    System.out.println(mainmethod.composeMethod());
+    // System.out.println(method.composeMethod());
   }
 }
