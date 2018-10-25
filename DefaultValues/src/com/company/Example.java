@@ -5,6 +5,10 @@ public class Example {
     char myChar;
     byte myByte;
     short myShort;
+    int myInteger;
+    long myLong;
+    float myFloat;
+    double myDouble;
 
     public boolean isMyBoolean() {
         return myBoolean;
@@ -37,11 +41,5 @@ public class Example {
     public double getMyDouble() {
         return myDouble;
     }
-
-    int myInteger;
-    long myLong;
-    float myFloat;
-    double myDouble;
-
 
 }
