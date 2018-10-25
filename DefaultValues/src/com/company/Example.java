@@ -9,6 +9,7 @@ public class Example {
     long myLong;
     float myFloat;
     double myDouble;
+    String myString;
 
     public boolean isMyBoolean() {
         return myBoolean;
@@ -40,6 +41,10 @@ public class Example {
 
     public double getMyDouble() {
         return myDouble;
+    }
+
+    public String getMyString() {
+        return myString;
     }
 
 }

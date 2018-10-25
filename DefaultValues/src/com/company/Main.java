@@ -12,5 +12,6 @@ public class Main {
         System.out.println(myExample.getMyLong());
         System.out.println(myExample.getMyFloat());
         System.out.println(myExample.getMyDouble());
+        System.out.println(myExample.getMyString());
     }
 }
