@@ -1,54 +1,32 @@
+import java.util.ArrayList;
+
 public class Battleship {
 
     // Fields
-    int[] locationCells;
-    int numberOfHits = 0;
+    private ArrayList<String> locationCells;
 
-    public int[] getLocationCells() {
-        return locationCells;
-    }
-
-    public int getNumberOfHits() {
-        return numberOfHits;
-    }
-
-    public void setLocationCells(int[] locationCells) {
+    public void setLocationCells(ArrayList<String> locationCells) {
         this.locationCells = locationCells;
     }
 
-    public void setNumberOfHits(int hits) {
-        this.numberOfHits = hits;
-    }
-
-    public String guess(String guess) {
-        // increments totalGuesses w/ each guess;
-        int userGuess = Integer.parseInt(guess);
+    public String guess(String userInput) {
 
         String result = "miss";
 
-        for (int cell : locationCells) {
-            if (userGuess == cell) {
+        // returns -1 if userInput isn't w/i the array
+        int index = locationCells.indexOf(userInput);
+
+        if (index >= 0) {
+            locationCells.remove(index);
+
+            if (locationCells.isEmpty()) {
+                result = "kill";
+            } else {
                 result = "hit";
-                numberOfHits++;
-                break;
             }
         }
-
-        if (numberOfHits == locationCells.length) {
-            result = "kill";
-        }
-
-        System.out.println(result);
+//        System.out.println(result);
         return result;
-
-    }
-
-    public static void main(String[] args) {
-        Battleship ship = new Battleship();
-        int[] locations = {2, 3, 4};
-
-        ship.setLocationCells(locations);
-        ship.guess("5");
     }
 }
 

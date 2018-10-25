@@ -5,7 +5,7 @@ public class BattleshipTestDrive {
         Battleship ship = new Battleship();
         int[] locations = {2, 3, 4};
 
-        ship.setLocationCells(locations);
+//        ship.setLocationCells(locations);
 
         String userGuess = "2";
 
