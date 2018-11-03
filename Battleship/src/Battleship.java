@@ -4,28 +4,33 @@ public class Battleship {
 
     // Fields
     private ArrayList<String> locationCells;
+    private String name;
 
-    public void setLocationCells(ArrayList<String> locationCells) {
-        this.locationCells = locationCells;
+    public void setLocationCells(ArrayList<String> location) {
+        this.locationCells = location;
+    }
+
+    public void setName(String shipName) {
+        this.name = shipName;
     }
 
     public String guess(String userInput) {
 
         String result = "miss";
 
-        // returns -1 if userInput isn't w/i the array
+        // returns location if guess is w/i AL; otherwise returns -1
         int index = locationCells.indexOf(userInput);
 
         if (index >= 0) {
             locationCells.remove(index);
 
-            if (locationCells.isEmpty()) {
+            if (locationCells.isEmpty()) { // determines if sunk yet
                 result = "kill";
+                System.out.println("You have sunk the " + this.name + ".");
             } else {
                 result = "hit";
             }
         }
-//        System.out.println(result);
         return result;
     }
 }
