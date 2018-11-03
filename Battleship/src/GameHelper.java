@@ -27,47 +27,47 @@ public class GameHelper {
     public ArrayList<String> placeBattleship(int shipSize) {
         ArrayList<String> alphaCells = new ArrayList<String>();
 
-        String temp = null;
+        String temporaryString = null;
         int[] coords = new int[shipSize];
         int attempts = 0;
         boolean success = false;
         int location = 0;
 
         shipCount++;
-        int incr = 1;
-        if ((shipCount % 2) == 1) {
-            incr = gridLength;
+        int incr = 1; // set horizontal increment
+        if ((shipCount % 2) == 1) { // if odd #, place vertically
+            incr = gridLength; // set vertical increment
         }
         while (!success & attempts++ < 200) {
-            location = (int) (Math.random() * gridSize);
+            location = (int) (Math.random() * gridSize); //random starting point
             int x = 0;
                 success = true;
-                while (success && x < shipSize) {
-                    if (grid[location] == 0) {
-                        coords[x++] = location;
-                        location += incr;
-                        if (location >= gridSize) {
+                while (success && x < shipSize) { // adjacent unused spots?
+                    if (grid[location] == 0) {    // if not already used,
+                        coords[x++] = location;   // save location
+                        location += incr;         // try 'next' location
+                        if (location >= gridSize) { // Out of Bounds
                             success = false;
-                        }
+                        } // Out of Bounds: Right Edge vv
                         if (x > 0 && (location % gridLength == 0)) {
                             success = false;
                         }
-                    } else {
+                    } else {                      // Found already used location
                         success = false;
                     }
                 }
         }
 
-        int x = 0;
+        int x = 0;                            // Turn location into alpha coords
         int row = 0;
         int column = 0;
         while (x < shipSize) {
-            grid[coords[x]] = 1;
+            grid[coords[x]] = 1;            // mark master grid points as 'used'
             row = (int) (coords[x] / gridLength);
             column = coords[x] % gridLength;
-            temp = String.valueOf(alphabet.charAt(column));
-            alphaCells.add(temp.concat(Integer.toString(row)));
-            x++;
+            temporaryString = String.valueOf(alphabet.charAt(column));
+            alphaCells.add(temporaryString.concat(Integer.toString(row)));
+            x++;             // Convert to alpha ^^
         }
         return alphaCells;
     }
