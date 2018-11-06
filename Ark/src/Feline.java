@@ -1,4 +1,4 @@
-public class Feline extends Animal{
+abstract public class Feline extends Animal{
     @Override
     public void roam(){
         super.roam();

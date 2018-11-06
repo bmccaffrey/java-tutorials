@@ -1,4 +1,4 @@
-public class Animal {
+abstract public class Animal {
     public String picture; // fileName.jpeg
     public String food; // meat || grass
     public int hunger; // when & how much animal eats

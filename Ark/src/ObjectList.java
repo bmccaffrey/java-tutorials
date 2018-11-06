@@ -20,5 +20,6 @@ public class ObjectList {
         System.out.println(c);
         Dog d = (Dog) b;
         System.out.println(d);
+        System.out.println();
     }
 }
