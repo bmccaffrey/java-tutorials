@@ -6,6 +6,13 @@ abstract public class Animal {
     public int[] boundaries = {400, 400}; // h x w of space / enclosure;
     public int[] location = new int[2]; // x & y coordinates
 
+    public Animal() {
+        System.out.println("Object() is finished executing.");
+        System.out.println("Object()'s stack frame has been popped off the " +
+                "stack");
+        System.out.println("Animal constructor called.");
+        System.out.println("Animal()'s stack frame is at the top of the stack");
+    }
     // add noise to instance variables or override
     public void makeNoise() { System.out.println("Making loud noises"); }
 
