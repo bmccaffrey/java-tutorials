@@ -11,40 +11,14 @@ public class VideoMusicPlayer {
 
     public static void main(String[] args) {
         VideoMusicPlayer vmp = new VideoMusicPlayer();
-        vmp.go();
+        vmp.start();
     }
 
-    public void go() {
+    public void start() {
         setUpFrameAndPanel();
-        try {
-            Sequencer sequencer = MidiSystem.getSequencer();
-//            Sequencer sequencer = openSequencer();
-            sequencer.open();
-            sequencer.addControllerEventListener(panel, new int[]{127});
-
-            Sequence seq = getSequence();
-
-            sequencer.setSequence(seq);
-            sequencer.setTempoInBPM(220);
-            sequencer.start();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        initializeSequencer();
     }
 
-    private Sequence getSequence() throws InvalidMidiDataException {
-        Sequence seq = new Sequence(Sequence.PPQ, 4);
-        Track track = seq.createTrack();
-        int randomNote = 0;
-        for (int i = 5; i < 160; i += 4) {
-            randomNote = (int) ((Math.random() * 50) + 1);
-            track.add(makeEvent(144, 1, randomNote, 100, i));
-            track.add(makeEvent(176, 1, 127, 0, i));
-            track.add(makeEvent(128, 1, randomNote, 100, i + 2));
-        }
-        return seq;
-    }
-    
     public void setUpFrameAndPanel() {
         createPanel();
         setFrameDefaults();
@@ -61,7 +35,40 @@ public class VideoMusicPlayer {
         frame.setVisible(true);
     }
 
-    public static MidiEvent makeEvent(int command, int channel, int note, int velocity, int tick) {
+    private void initializeSequencer() {
+        try {
+            Sequencer sequencer = MidiSystem.getSequencer();
+            sequencer.open();
+            sequencer.addControllerEventListener(panel, new int[]{127});
+            createAndSetSequence(sequencer);
+            sequencer.setTempoInBPM(220);
+            sequencer.start();
+        } catch(MidiUnavailableException | InvalidMidiDataException e) { e.printStackTrace(); }
+    }
+
+    private void createAndSetSequence(Sequencer sequencer) throws InvalidMidiDataException {
+        Sequence sequence = createSequence();
+        sequencer.setSequence(sequence);
+    }
+
+    private Sequence createSequence() throws InvalidMidiDataException {
+        Sequence sequence = new Sequence(Sequence.PPQ, 4);
+        Track track = sequence.createTrack();
+        addRandomEventsToTrack(track);
+        return sequence;
+    }
+
+    private void addRandomEventsToTrack(Track track) {
+        int randomNote = 0;
+        for (int i = 5; i < 160; i += 4) {
+            randomNote = (int) ((Math.random() * 50) + 1);
+            track.add(makeEvent(144, 1, randomNote, 100, i));
+            track.add(makeEvent(176, 1, 127, 0, i));
+            track.add(makeEvent(128, 1, randomNote, 100, i + 2));
+        }
+    }
+
+    private static MidiEvent makeEvent(int command, int channel, int note, int velocity, int tick) {
         MidiEvent event = null;
         ShortMessage shortMessage = createMessage(command, channel, note, velocity);
         event = new MidiEvent(shortMessage, tick);
@@ -69,21 +76,14 @@ public class VideoMusicPlayer {
     }
 
     private static ShortMessage createMessage(int command, int channel, int note, int velocity) {
-        ShortMessage a = new ShortMessage();
-        try { a.setMessage(command, channel, note, velocity); }
+        ShortMessage shortMessage = new ShortMessage();
+        try { shortMessage.setMessage(command, channel, note, velocity); }
         catch (InvalidMidiDataException e) { e.printStackTrace(); }
-        return a;
-    }
-
-    private void randomizeValues(int[] array, int upperBound, int offSet) {
-        for (int i = 0; i < array.length; i++) {
-            array[i] = (int) ((Math.random() * upperBound) + offSet);
-        }
+        return shortMessage;
     }
 
     class MyDrawPanel extends JPanel implements ControllerEventListener {
         boolean message = false;
-
         public void controlChange(ShortMessage event) {
             message = true;
             repaint();
@@ -95,8 +95,7 @@ public class VideoMusicPlayer {
                 randomizeColorSizeAndCoordinates();
                 Color randomColor = new Color(rgb[0], rgb[1], rgb[2]);
                 g.setColor(randomColor);
-                g.fillRect(coordinates[0], coordinates[1], heightAndWidth[0],
-                        heightAndWidth[1]);
+                g.fillRect(coordinates[0], coordinates[1], heightAndWidth[0], heightAndWidth[1]);
                 message = false;
             }
         }
@@ -106,5 +105,11 @@ public class VideoMusicPlayer {
         randomizeValues(rgb, 256, 0);
         randomizeValues(heightAndWidth, 120, 10);
         randomizeValues(coordinates, 40, 60);
+    }
+
+    private void randomizeValues(int[] array, int upperBound, int offSet) {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = (int) ((Math.random() * upperBound) + offSet);
+        }
     }
 }
