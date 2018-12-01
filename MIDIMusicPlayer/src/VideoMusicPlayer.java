@@ -14,6 +14,7 @@ public class VideoMusicPlayer {
 
     public void setUPGui() {
         ml = new MyDrawPanel();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(ml);
         frame.setBounds(30,30,300,300);
         frame.setVisible(true);
@@ -74,18 +75,18 @@ public class VideoMusicPlayer {
         public void paintComponent(Graphics g) {
             if (msg) {
                 Graphics2D g2 = (Graphics2D) g;
-                int r = (int) (Math.random() * 250);
-                int gr = (int) (Math.random() * 250);
-                int b = (int) (Math.random() * 250);
+                int red = (int) (Math.random() * 256);
+                int green = (int) (Math.random() * 256);
+                int blue = (int) (Math.random() * 256);
 
-                g.setColor(new Color(r, gr, b));
+                g.setColor(new Color(red, green, blue));
 
-                int ht = (int) ((Math.random() * 120) + 10);
+                int height = (int) ((Math.random() * 120) + 10);
                 int width = (int) ((Math.random() * 120) + 10);
                 int x = (int) ((Math.random() * 40) + 10);
                 int y = (int) ((Math.random() * 40) + 10);
 
-                g.fillRect(x, y, width, ht);
+                g.fillRect(x, y, width, height);
                 msg = false;
             }
         }
