@@ -19,53 +19,82 @@ public class QuizCardBuilder {
     }
     public void go() {
         frame = new JFrame("Quiz Card Builder");
-        JPanel mainPanel = new JPanel();
+        JPanel panel = new JPanel();
         Font bigFont = new Font("sansserif", Font.BOLD, 24);
-        question = new JTextArea(6, 20);
-        question.setLineWrap(true);
-        question.setFont(bigFont);
 
-        JScrollPane qScroller = new JScrollPane(question);
-        qScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        qScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        answer = new JTextArea(6, 20);
-        answer.setLineWrap(true);
-        answer.setWrapStyleWord(true);
-        answer.setFont(bigFont);
-
-        JScrollPane aScroller = new JScrollPane(answer);
-        aScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        aScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        initializeTextAreas(bigFont);
+        JScrollPane questionScrollbar = new JScrollPane(question);
+        JScrollPane answerScrollbar = new JScrollPane(answer);
+        setScrollBarPolicies(questionScrollbar, answerScrollbar);
 
         JButton nextButton = new JButton("Next Card");
         cardList = new ArrayList<QuizCard>();
+        JLabel questionLabel = new JLabel("Question:");
+        JLabel answerLabel = new JLabel("Answer:");
 
-        JLabel qLabel = new JLabel("Question:");
-        JLabel aLabel = new JLabel("Answer:");
+        addComponentsToPanel(panel, questionScrollbar, answerScrollbar, nextButton, questionLabel, answerLabel);
+        ComposeMenuBar(nextButton);
+        frame.getContentPane().add(BorderLayout.CENTER, panel);
+        setFrameDefaults();
+    }
 
-        mainPanel.add(qLabel);
-        mainPanel.add(qScroller);
-        mainPanel.add(aLabel);
-        mainPanel.add(aScroller);
-        mainPanel.add(nextButton);
-        nextButton.addActionListener(new NextCardListener());
+    private void setFrameDefaults() {
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500, 600);
+        frame.setVisible(true);
+    }
+
+    private void ComposeMenuBar(JButton nextButton) {
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
         JMenuItem newMenuItem = new JMenuItem("New");
         JMenuItem saveMenuItem = new JMenuItem("Save");
+        addEventListeners(nextButton, newMenuItem, saveMenuItem);
+    }
+
+    private void addEventListeners(JButton nextButton, JMenuItem newMenuItem, JMenuItem saveMenuItem) {
+        nextButton.addActionListener(new NextCardListener());
         newMenuItem.addActionListener(new NewMenuListener());
-
         saveMenuItem.addActionListener(new SaveMenuListener());
-        fileMenu.add(newMenuItem);
-        fileMenu.add(saveMenuItem);
+    }
 
-        menuBar.add(fileMenu);
-        frame.setJMenuBar(menuBar);
-        frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 600);
-        frame.setVisible(true);
+    private void addMenuItemListeners(JMenuItem newMenuItem, JMenuItem saveMenuItem) {
+        newMenuItem.addActionListener(new NewMenuListener());
+        saveMenuItem.addActionListener(new SaveMenuListener());
+    }
+
+    private void addComponentsToPanel(JPanel panel, JScrollPane questionScrollbar, JScrollPane answerScrollbar, JButton nextButton, JLabel questionLabel, JLabel answerLabel) {
+        panel.add(questionLabel);
+        panel.add(questionScrollbar);
+        panel.add(answerLabel);
+        panel.add(answerScrollbar);
+        panel.add(nextButton);
+    }
+
+    private void setScrollBarPolicies(JScrollPane questionScrollbar, JScrollPane answerScrollbar) {
+        questionScrollbar.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        questionScrollbar.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        answerScrollbar.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        answerScrollbar.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    }
+
+    private void initializeTextAreas(Font bigFont) {
+        initializeQuestionTextArea(bigFont);
+        initializeAnswerTextArea(bigFont);
+    }
+
+    private void initializeAnswerTextArea(Font bigFont) {
+        answer = new JTextArea(6, 20);
+        answer.setLineWrap(true);
+        answer.setWrapStyleWord(true);
+        answer.setFont(bigFont);
+    }
+
+    private void initializeQuestionTextArea(Font bigFont) {
+        question = new JTextArea(6, 20);
+        question.setLineWrap(true);
+        question.setWrapStyleWord(true);
+        question.setFont(bigFont);
     }
 
     class NextCardListener implements ActionListener {
@@ -75,6 +104,7 @@ public class QuizCardBuilder {
             clearCard();
         }
     }
+
     class SaveMenuListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
             QuizCard card = new QuizCard(question.getText(), answer.getText());
@@ -84,17 +114,20 @@ public class QuizCardBuilder {
             saveFile(fileSave.getSelectedFile());
         }
     }
+
     class NewMenuListener implements ActionListener {
         public void actionPerformed(ActionEvent ev) {
             cardList.clear();
             clearCard();
         }
     }
+
     private void clearCard() {
         question.setText("");
         answer.setText("");
         question.requestFocus();
     }
+
     private void saveFile(File file) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
