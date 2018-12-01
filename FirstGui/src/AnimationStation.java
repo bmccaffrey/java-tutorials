@@ -17,15 +17,15 @@ public class AnimationStation{
         setFrameDefaults();
     }
 
+    private void createPanel() {
+        MyDrawPanel panel = new MyDrawPanel();
+        frame.getContentPane().add(BorderLayout.CENTER, panel);
+    }
+
     private void setFrameDefaults() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300,300);
         frame.setVisible(true);
-    }
-
-    private void createPanel() {
-        MyDrawPanel panel = new MyDrawPanel();
-        frame.getContentPane().add(BorderLayout.CENTER, panel);
     }
 
     private void painfullyAnimate(int speedMillis, int duration) {
@@ -34,11 +34,6 @@ public class AnimationStation{
             frame.repaint();
             addDelay(speedMillis);
         }
-    }
-
-    private void addDelay(int speedMillis) {
-        try { Thread.sleep(speedMillis); }
-        catch (Exception ex) { ex.printStackTrace();}
     }
 
     private void randomizeColorsAndCoordinates() {
@@ -50,6 +45,11 @@ public class AnimationStation{
         for (int i = 0; i < array.length; i++) {
             array[i] = (int) (Math.random() * upperBound);
         }
+    }
+
+    private void addDelay(int speedMillis) {
+        try { Thread.sleep(speedMillis); }
+        catch (Exception ex) { ex.printStackTrace();}
     }
 
     class MyDrawPanel extends JPanel {
