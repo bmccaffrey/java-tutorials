@@ -1,94 +1,110 @@
 import javax.sound.midi.*;
 import javax.swing.*;
 import java.awt.*;
-// import java.io.*;
 
 public class VideoMusicPlayer {
     static JFrame frame = new JFrame("Fist & Only Music Video");
-    static MyDrawPanel ml;
+    static MyDrawPanel panel;
+    private int[] coordinates = new int[2];
+    private int[] rgb = new int[3];
+    private int[] heightAndWidth = new int[2];
 
     public static void main(String[] args) {
         VideoMusicPlayer vmp = new VideoMusicPlayer();
         vmp.go();
     }
 
-    public void setUPGui() {
-        ml = new MyDrawPanel();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setContentPane(ml);
-        frame.setBounds(30,30,300,300);
-        frame.setVisible(true);
-    }
-
     public void go() {
-        setUPGui();
+        setUpFrameAndPanel();
         try {
             Sequencer sequencer = MidiSystem.getSequencer();
+//            Sequencer sequencer = openSequencer();
             sequencer.open();
+            sequencer.addControllerEventListener(panel, new int[]{127});
 
-            sequencer.addControllerEventListener(ml, new int[] {127});
-            Sequence seq = new Sequence(Sequence.PPQ, 4);
-            Track track = seq.createTrack();
+            Sequence seq = getSequence();
 
-            int r = 0;
-            for (int i = 5; i < 61; i += 4) {
-                r = (int) ((Math.random() * 50) + 1);
-
-                track.add(makeEvent(144, 1, r, 100, i));
-                /*
-                Serves as Event for Sequencer
-                176 = ControllerEvent command;
-                Velocity = 0, so inaudible;
-                Same Tick as NOTE ON, so fires on when each note start
-                */
-                track.add(makeEvent(176, 1, 127, 0, i));
-                track.add(makeEvent(128, 1, r, 100, i + 2));
-            }
             sequencer.setSequence(seq);
-            sequencer.start();
             sequencer.setTempoInBPM(220);
+            sequencer.start();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
+    private Sequence getSequence() throws InvalidMidiDataException {
+        Sequence seq = new Sequence(Sequence.PPQ, 4);
+        Track track = seq.createTrack();
+        int randomNote = 0;
+        for (int i = 5; i < 160; i += 4) {
+            randomNote = (int) ((Math.random() * 50) + 1);
+            track.add(makeEvent(144, 1, randomNote, 100, i));
+            track.add(makeEvent(176, 1, 127, 0, i));
+            track.add(makeEvent(128, 1, randomNote, 100, i + 2));
+        }
+        return seq;
+    }
+    
+    public void setUpFrameAndPanel() {
+        createPanel();
+        setFrameDefaults();
+    }
+
+    private void createPanel() {
+        panel = new MyDrawPanel();
+        frame.setContentPane(panel);
+    }
+
+    private void setFrameDefaults() {
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(30, 30, 300, 300);
+        frame.setVisible(true);
+    }
+
     public static MidiEvent makeEvent(int command, int channel, int note, int velocity, int tick) {
         MidiEvent event = null;
-        try {
-            ShortMessage a = new ShortMessage();
-            a.setMessage(command, channel, note, velocity);
-            event = new MidiEvent(a, tick);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ShortMessage shortMessage = createMessage(command, channel, note, velocity);
+        event = new MidiEvent(shortMessage, tick);
         return event;
     }
 
+    private static ShortMessage createMessage(int command, int channel, int note, int velocity) {
+        ShortMessage a = new ShortMessage();
+        try { a.setMessage(command, channel, note, velocity); }
+        catch (InvalidMidiDataException e) { e.printStackTrace(); }
+        return a;
+    }
+
+    private void randomizeValues(int[] array, int upperBound, int offSet) {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = (int) ((Math.random() * upperBound) + offSet);
+        }
+    }
+
     class MyDrawPanel extends JPanel implements ControllerEventListener {
-        boolean msg = false;
+        boolean message = false;
 
         public void controlChange(ShortMessage event) {
-            msg = true;
+            message = true;
             repaint();
         }
 
         public void paintComponent(Graphics g) {
-            if (msg) {
+            if (message) {
                 Graphics2D g2 = (Graphics2D) g;
-                int red = (int) (Math.random() * 256);
-                int green = (int) (Math.random() * 256);
-                int blue = (int) (Math.random() * 256);
-
-                g.setColor(new Color(red, green, blue));
-
-                int height = (int) ((Math.random() * 120) + 10);
-                int width = (int) ((Math.random() * 120) + 10);
-                int x = (int) ((Math.random() * 40) + 10);
-                int y = (int) ((Math.random() * 40) + 10);
-
-                g.fillRect(x, y, width, height);
-                msg = false;
+                randomizeColorSizeAndCoordinates();
+                Color randomColor = new Color(rgb[0], rgb[1], rgb[2]);
+                g.setColor(randomColor);
+                g.fillRect(coordinates[0], coordinates[1], heightAndWidth[0],
+                        heightAndWidth[1]);
+                message = false;
             }
         }
+    }
+
+    private void randomizeColorSizeAndCoordinates() {
+        randomizeValues(rgb, 256, 0);
+        randomizeValues(heightAndWidth, 120, 10);
+        randomizeValues(coordinates, 40, 60);
     }
 }
