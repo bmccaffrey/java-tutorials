@@ -14,7 +14,7 @@ public class FileRead {
             while((line = reader.readLine()) != null) {
                 System.out.println(line);
             }
-            
+
             reader.close();
         } catch(IOException ex) {
             ex.printStackTrace();
