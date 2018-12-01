@@ -58,11 +58,6 @@ public class QuizCardBuilder {
         saveMenuItem.addActionListener(new SaveMenuListener());
     }
 
-    private void addMenuItemListeners(JMenuItem newMenuItem, JMenuItem saveMenuItem) {
-        newMenuItem.addActionListener(new NewMenuListener());
-        saveMenuItem.addActionListener(new SaveMenuListener());
-    }
-
     private void addComponentsToPanel(JPanel panel, JScrollPane questionScrollbar, JScrollPane answerScrollbar, JButton nextButton, JLabel questionLabel, JLabel answerLabel) {
         panel.add(questionLabel);
         panel.add(questionScrollbar);
