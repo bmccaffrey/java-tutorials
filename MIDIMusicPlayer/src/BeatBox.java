@@ -30,7 +30,6 @@ public class BeatBox {
         checkboxList = new ArrayList<JCheckBox>();
 
         Box buttonBox = new Box(BoxLayout.Y_AXIS);
-        Box nameBox = new Box(BoxLayout.Y_AXIS);
 
         JButton start = new JButton();
         buttonBox.add(start);
@@ -38,6 +37,7 @@ public class BeatBox {
         JButton stop = new JButton();
         buttonBox.add(stop);
 
+        Box nameBox = new Box(BoxLayout.Y_AXIS);
         for (int i = 0; i < 16; i++) {
             nameBox.add(new Label(instrumentNames[i]));
         }
@@ -45,16 +45,25 @@ public class BeatBox {
         background.add(BorderLayout.EAST, buttonBox);
         background.add(BorderLayout.WEST, nameBox);
 
+        theFrame.getContentPane().add(background);
+
         GridLayout grid = new GridLayout(16, 17);
         grid.setVgap(1);
         grid.setHgap(2);
 
         mainPanel = new JPanel(grid);
+
+        for (int i = 0; i < 256; i++) {
+            JCheckBox c = new JCheckBox();
+            c.setSelected(false);
+            checkboxList.add(c);
+            mainPanel.add(c);
+        }
+
         background.add(BorderLayout.CENTER, mainPanel);
 
-        theFrame.getContentPane().add(background);
         theFrame.pack();
-        theFrame.setBounds(50, 50, 300, 300);
+        theFrame.setBounds(50, 50, 600, 600);
         theFrame.setVisible(true);
     }
 
