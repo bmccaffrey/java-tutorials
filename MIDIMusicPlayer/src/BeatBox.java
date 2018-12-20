@@ -18,30 +18,31 @@ public class BeatBox {
     public void buildGUI() {
         theFrame = new JFrame("Beatbox");
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         BorderLayout layout = new BorderLayout();
+
         JPanel background = new JPanel(layout);
         background.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         checkboxList = new ArrayList<JCheckBox>();
+
         Box buttonBox = new Box(BoxLayout.Y_AXIS);
+        Box nameBox = new Box(BoxLayout.Y_AXIS);
 
         JButton start = new JButton();
-        JButton stop = new JButton();
-
         buttonBox.add(start);
+
+        JButton stop = new JButton();
         buttonBox.add(stop);
 
         background.add(BorderLayout.EAST, buttonBox);
-
-        Box nameBox = new Box(BoxLayout.Y_AXIS);
-
         background.add(BorderLayout.WEST, nameBox);
 
         GridLayout grid = new GridLayout(16, 17);
         grid.setVgap(1);
         grid.setHgap(2);
-        mainPanel = new JPanel(grid);
 
+        mainPanel = new JPanel(grid);
         background.add(BorderLayout.CENTER, mainPanel);
 
         theFrame.getContentPane().add(background);
