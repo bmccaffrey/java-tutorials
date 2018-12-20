@@ -13,7 +13,7 @@ public class BeatBox {
 
     String[] instrumentNames = {"Bass Drum", "Closed Hi-Hat", "Open Hi-Hat", "Acoustic Snare", "Crash Cymbal", "Hand Clap", "High Tom", "Hi Bongo", "Maracas", "Whistle", "Low Conga", "Cowbell", "Vibraslap", "Low-mid Tom", "High Agogo", "Open Hi Conga"};
     int [] instruments = {35, 42, 46, 38, 49, 39, 50, 60, 70, 72, 64, 56, 58, 47, 67, 63};
-    
+
     public static void main(String[] args) {
         new BeatBox().buildGUI();
     }
@@ -37,6 +37,10 @@ public class BeatBox {
 
         JButton stop = new JButton();
         buttonBox.add(stop);
+
+        for (int i = 0; i < 16; i++) {
+            nameBox.add(new Label(instrumentNames[i]));
+        }
 
         background.add(BorderLayout.EAST, buttonBox);
         background.add(BorderLayout.WEST, nameBox);
