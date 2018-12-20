@@ -33,6 +33,17 @@ public class BeatBox {
 
         background.add(BorderLayout.EAST, buttonBox);
 
+        Box nameBox = new Box(BoxLayout.Y_AXIS);
+
+        background.add(BorderLayout.WEST, nameBox);
+
+        GridLayout grid = new GridLayout(16, 17);
+        grid.setVgap(1);
+        grid.setHgap(2);
+        mainPanel = new JPanel(grid);
+
+        background.add(BorderLayout.CENTER, mainPanel);
+
         theFrame.getContentPane().add(background);
         theFrame.pack();
         theFrame.setBounds(50, 50, 300, 300);
