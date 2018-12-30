@@ -36,4 +36,18 @@ public class Jukebox1 {
         songList.add(tokens[0]); // only adds the song title
     }
 
+    class Song {
+        String title;
+        String artist;
+        String rating;
+        String bpm;
+
+        Song(String t, String a, String r, String b) {
+            title = t;
+            artist = a;
+            rating = r;
+            bpm = b;
+        }
+    }
+
 }
