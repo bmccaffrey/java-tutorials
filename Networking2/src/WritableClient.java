@@ -41,6 +41,10 @@ public class WritableClient {
         mainPanel.add(sendButton);
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
         setUpNetworking();
+
+        Thread readerThread = new Thread(new IncomingReader());
+        readerThread.start();
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 500);
         frame.setVisible(true);
