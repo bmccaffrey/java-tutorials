@@ -18,9 +18,8 @@ public class SimpleServer {
 
     public void setUp() {
         try {
-            ServerSocket serverSock = new ServerSocket(4242);
-            Socket s = new Socket("190.165.1.103", 4242);
-            Socket sock = serverSock.accept();
+            ServerSocket serverSock = new ServerSocket(5000);
+            Socket clientSocket = serverSock.accept();
         } catch(IOException ex) {ex.printStackTrace(); }
     }
 
@@ -49,7 +48,7 @@ public class SimpleServer {
 
         public void run() {
             String message;
-            
+
             try {
                 while ((message = reader.readLine()) != null) {
                     System.out.println("read " + message);
