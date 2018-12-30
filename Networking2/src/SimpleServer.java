@@ -1,8 +1,14 @@
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class SimpleServer {
+
+    ArrayList clientOutputStream;
+    
     public static void main(String[] args) {
         SimpleServer server = new SimpleServer();
         server.setUp();
@@ -15,4 +21,16 @@ public class SimpleServer {
             Socket sock = serverSock.accept();
         } catch(IOException ex) {ex.printStackTrace(); }
     }
+
+    public void update(String message) {
+        Iterator it = clientOutputStream.iterator();
+        while (it.hasNext()) {
+            try {
+                PrintWriter writer = (PrintWriter) it.next();
+                writer.println(message);
+                writer.flush();
+            } catch (Exception ex) { ex.printStackTrace(); }
+        }
+    }
+
 }
