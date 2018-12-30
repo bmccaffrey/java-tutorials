@@ -16,9 +16,11 @@ public class TestTree {
         System.out.println(tree);
     }
 
-    class Book {
+    class Book implements Comparable<Book> {
         String title;
         public Book(String title) { this.title = title; }
+        public String getTitle() { return title; }
+        public int compareTo(Book b) { return title.compareTo(b.getTitle()); }
     }
 
 }
