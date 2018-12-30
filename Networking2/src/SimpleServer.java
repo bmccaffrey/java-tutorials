@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 public class SimpleServer {
 
-    ArrayList clientOutputStream;
+    ArrayList clientOutputStreams;
 
     public static void main(String[] args) {
         SimpleServer server = new SimpleServer();
@@ -17,14 +17,22 @@ public class SimpleServer {
     }
 
     public void setUp() {
+        clientOutputStreams = new ArrayList();
+
         try {
             ServerSocket serverSock = new ServerSocket(5000);
-            Socket clientSocket = serverSock.accept();
+
+            while (true) {
+                Socket clientSocket = serverSock.accept();
+                PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
+                clientOutputStreams.add(writer);
+            }
+            
         } catch(IOException ex) {ex.printStackTrace(); }
     }
 
     public void update(String message) {
-        Iterator it = clientOutputStream.iterator();
+        Iterator it = clientOutputStreams.iterator();
         while (it.hasNext()) {
             try {
                 PrintWriter writer = (PrintWriter) it.next();
