@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,7 +10,7 @@ import java.util.Iterator;
 public class SimpleServer {
 
     ArrayList clientOutputStream;
-    
+
     public static void main(String[] args) {
         SimpleServer server = new SimpleServer();
         server.setUp();
@@ -31,6 +33,21 @@ public class SimpleServer {
                 writer.flush();
             } catch (Exception ex) { ex.printStackTrace(); }
         }
+    }
+
+    public class ClientHandler implements Runnable {
+        BufferedReader reader;
+        Socket sock;
+
+        public ClientHandler(Socket clientSocket) {
+            try {
+                sock = clientSocket;
+                InputStreamReader isReader = new InputStreamReader(sock.getInputStream());
+                reader = new BufferedReader(isReader);
+            } catch (Exception ex) { ex.printStackTrace(); }
+        }
+
+        public void run() {}
     }
 
 }
