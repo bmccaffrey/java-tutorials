@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class Jukebox1 {
 
@@ -16,8 +17,11 @@ public class Jukebox1 {
         getSongs();
         System.out.println("File Order: " + songList);
 
+        ArtistCompare artistCompare = new ArtistCompare();
         Collections.sort(songList);
         System.out.println("Alphabetical Order: " + songList);
+        Collections.sort(songList, artistCompare);
+        System.out.println("Alphabetical by Artist: " + songList);
     }
 
     void getSongs() {
@@ -73,6 +77,12 @@ public class Jukebox1 {
 
         public String getBpm() {
             return bpm;
+        }
+    }
+
+    class ArtistCompare implements Comparator<Song> {
+        public int compare(Song one, Song two) {
+            return one.getArtist().compareTo(two.getArtist());
         }
     }
 
