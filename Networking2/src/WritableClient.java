@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -9,6 +10,7 @@ import java.net.Socket;
 public class WritableClient {
     JTextArea incoming;
     JTextField outgoing;
+    BufferedReader reader;
     PrintWriter writer;
     Socket sock;
 
@@ -60,6 +62,18 @@ public class WritableClient {
             } catch(Exception ex) { ex.printStackTrace(); }
             outgoing.setText("");
             outgoing.requestFocus();
+        }
+    }
+
+    public class IncomingReader implements Runnable {
+        public void run() {
+            String message;
+            try {
+                while ((message = reader.readLine()) != null) {
+                    System.out.println("read " + message);
+                    incoming.append(message + "\n");
+                }
+            } catch(Exception ex) { ex.printStackTrace(); }
         }
     }
 }
