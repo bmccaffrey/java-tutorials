@@ -12,8 +12,7 @@ public class SimpleServer {
     ArrayList clientOutputStreams;
 
     public static void main(String[] args) {
-        SimpleServer server = new SimpleServer();
-        server.setUp();
+        new SimpleServer().setUp();
     }
 
     public void setUp() {
@@ -26,8 +25,11 @@ public class SimpleServer {
                 Socket clientSocket = serverSock.accept();
                 PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
                 clientOutputStreams.add(writer);
+
+                Thread t = new Thread(new ClientHandler(clientSocket));
+                t.start();
+                System.out.println("Connection received.");
             }
-            
         } catch(IOException ex) {ex.printStackTrace(); }
     }
 
