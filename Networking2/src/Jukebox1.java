@@ -61,6 +61,15 @@ public class Jukebox1 {
             this.bpm = bpm;
         }
 
+        public boolean equals(Object aSong) {
+            Song s = (Song) aSong;
+            return getTitle().equals(s.getTitle());
+        }
+
+        public int hashCode() {
+            return title.hashCode();
+        }
+
         public int compareTo(Song s) {
             return title.compareTo(s.getTitle());
         }
