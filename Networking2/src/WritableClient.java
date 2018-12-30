@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class WritableClient {
+    JTextArea incoming;
     JTextField outgoing;
     PrintWriter writer;
     Socket sock;
@@ -18,9 +19,22 @@ public class WritableClient {
     public void go() {
         JFrame frame = new JFrame("Simple Client");
         JPanel mainPanel = new JPanel();
+
+        incoming = new JTextArea(15, 50);
+        incoming.setLineWrap(true);
+        incoming.setWrapStyleWord(true);
+        incoming.setEditable(false);
+
+        JScrollPane qScroller = new JScrollPane(incoming);
+        qScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        qScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         outgoing = new JTextField(20);
         JButton sendButton = new JButton("Send");
         sendButton.addActionListener(new SendButtonListener());
+
+        mainPanel.add(qScroller);
+
         mainPanel.add(outgoing);
         mainPanel.add(sendButton);
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
