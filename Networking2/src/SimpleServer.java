@@ -47,7 +47,16 @@ public class SimpleServer {
             } catch (Exception ex) { ex.printStackTrace(); }
         }
 
-        public void run() {}
+        public void run() {
+            String message;
+            
+            try {
+                while ((message = reader.readLine()) != null) {
+                    System.out.println("read " + message);
+                    update(message);
+                }
+            } catch (Exception ex) { ex.printStackTrace(); }
+        }
     }
 
 }
