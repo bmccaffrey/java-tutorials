@@ -22,7 +22,7 @@ public class Jukebox1 {
 
     void getSongs() {
         try {
-            File file = new File("SongList.txt");
+            File file = new File("SongListMore.txt");
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line = null;
             while ((line = reader.readLine()) != null) {
@@ -38,7 +38,7 @@ public class Jukebox1 {
         songList.add(nextSong);
     }
 
-    class Song {
+    class Song implements Comparable<Song> {
         String title;
         String artist;
         String rating;
@@ -49,6 +49,14 @@ public class Jukebox1 {
             this.artist = artist;
             this.rating = rating;
             this.bpm = bpm;
+        }
+
+        public int compareTo(Song s) {
+            return title.compareTo(s.getTitle());
+        }
+
+        public String toString() {
+            return this.title;
         }
 
         public String getTitle() {
@@ -65,10 +73,6 @@ public class Jukebox1 {
 
         public String getBpm() {
             return bpm;
-        }
-
-        public String toString() {
-            return this.title;
         }
     }
 
