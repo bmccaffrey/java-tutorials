@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Jukebox1 {
 
@@ -13,7 +14,10 @@ public class Jukebox1 {
 
     public void go() {
         getSongs();
-        System.out.println(songList);
+        System.out.println("File Order: " + songList);
+
+        Collections.sort(songList);
+        System.out.println("Alphabetical Order: " + songList);
     }
 
     void getSongs() {
@@ -29,7 +33,7 @@ public class Jukebox1 {
 
     void addSong(String lineToParse) {
         String[] tokens = lineToParse.split("/");
-        songList.add(tokens[0]);
+        songList.add(tokens[0]); // only adds the song title
     }
 
 }
