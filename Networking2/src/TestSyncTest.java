@@ -7,7 +7,7 @@ class TestSync implements Runnable {
             System.out.println("balance is " + balance);
         }
     }
-    public void increment() {
+    public synchronized void increment() {
         int i = balance;
         balance = i + 1;
     }
