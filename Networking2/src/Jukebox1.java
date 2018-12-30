@@ -64,7 +64,10 @@ public class Jukebox1 {
         public String getBpm() {
             return bpm;
         }
-        
+
+        public String toString() {
+            return this.title;
+        }
     }
 
 }
