@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f6ab5b2e-c2d6-4ec9-a5c1-a80dd5b1caa7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/TestGenerics1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestGenerics1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestGenerics1.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,13 +47,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="5397" />
+          <entry key="java" value="5473" />
           <entry key="txt" value="184" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="5397" />
+          <entry key="JAVA" value="5473" />
           <entry key="PLAIN_TEXT" value="184" />
         </counts>
       </usages-collector>
@@ -111,8 +112,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/TestGenerics1.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="300">
-                  <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+                <state relative-caret-position="210">
+                  <caret line="9" column="12" selection-start-line="9" selection-end-line="10" />
                 </state>
               </provider>
             </entry>
@@ -205,7 +206,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546200977691" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546201408911" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -223,7 +224,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.TestMap">
+  <component name="RunManager" selected="Application.TestGenerics1">
     <configuration name="Jukebox1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Jukebox1" />
       <module name="Networking2" />
@@ -231,15 +232,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestMap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TestMap" />
+    <configuration name="TestGenerics1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestGenerics1" />
       <module name="Networking2" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestSyncTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TestSyncTest" />
+    <configuration name="TestMap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestMap" />
       <module name="Networking2" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -260,19 +261,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.TestSyncTest" />
       <item itemvalue="Application.WritableClient" />
       <item itemvalue="Application.Jukebox1" />
       <item itemvalue="Application.TestTree" />
       <item itemvalue="Application.TestMap" />
+      <item itemvalue="Application.TestGenerics1" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TestGenerics1" />
         <item itemvalue="Application.TestMap" />
         <item itemvalue="Application.TestTree" />
         <item itemvalue="Application.Jukebox1" />
         <item itemvalue="Application.WritableClient" />
-        <item itemvalue="Application.TestSyncTest" />
       </list>
     </recent_temporary>
   </component>
@@ -293,7 +294,7 @@
     <frame x="0" y="-1080" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15548456" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.15548456" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -465,8 +466,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TestGenerics1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+        <state relative-caret-position="210">
+          <caret line="9" column="12" selection-start-line="9" selection-end-line="10" />
         </state>
       </provider>
     </entry>
