@@ -46,13 +46,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="4898" />
+          <entry key="java" value="4903" />
           <entry key="txt" value="184" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="4898" />
+          <entry key="JAVA" value="4903" />
           <entry key="PLAIN_TEXT" value="184" />
         </counts>
       </usages-collector>
@@ -90,8 +90,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/TestTree.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="368">
-                  <caret line="16" column="21" lean-forward="true" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+                <state relative-caret-position="437">
+                  <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -115,6 +115,7 @@
       <find>clientout</find>
       <find>clientOutputStreams</find>
       <find>compare</find>
+      <find>ArtistCompare</find>
     </findStrings>
     <replaceStrings>
       <replace>clientOutputStreams</replace>
@@ -184,7 +185,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546200370097" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546200629325" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -202,7 +203,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.TestTree">
+  <component name="RunManager" selected="Application.TestMap">
     <configuration name="Jukebox1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Jukebox1" />
       <module name="Networking2" />
@@ -210,8 +211,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RyanAndMonica" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="RyanAndMonica" />
+    <configuration name="TestMap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestMap" />
       <module name="Networking2" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -239,19 +240,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.RyanAndMonica" />
       <item itemvalue="Application.TestSyncTest" />
       <item itemvalue="Application.WritableClient" />
       <item itemvalue="Application.Jukebox1" />
       <item itemvalue="Application.TestTree" />
+      <item itemvalue="Application.TestMap" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TestMap" />
         <item itemvalue="Application.TestTree" />
         <item itemvalue="Application.Jukebox1" />
         <item itemvalue="Application.WritableClient" />
         <item itemvalue="Application.TestSyncTest" />
-        <item itemvalue="Application.RyanAndMonica" />
       </list>
     </recent_temporary>
   </component>
@@ -427,8 +428,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TestTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="16" column="21" lean-forward="true" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+        <state relative-caret-position="437">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
