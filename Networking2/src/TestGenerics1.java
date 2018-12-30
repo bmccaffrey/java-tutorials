@@ -10,7 +10,14 @@ public class TestGenerics1 {
         animals.add(new Dog());
         animals.add(new Cat());
         animals.add(new Dog());
+
+        ArrayList<Dog> dogs = new ArrayList<Dog>();
+        dogs.add(new Dog());
+        dogs.add(new Dog());
+        dogs.add(new Dog());
+
         takeAnimals(animals);
+        takeAnimals(dogs);
     }
 
     public void takeAnimals(ArrayList<Animal> animals) {
