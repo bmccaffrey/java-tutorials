@@ -252,7 +252,7 @@ public class BeatBoxFinal {
             }
         }
     }
-    
+
     public void makeTracks(ArrayList list) {
         Iterator it = list.iterator();
         for (int i = 0; i < 16; i++) {
