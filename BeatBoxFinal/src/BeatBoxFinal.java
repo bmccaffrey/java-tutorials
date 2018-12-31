@@ -2,13 +2,13 @@ import javax.sound.midi.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Vector;
 
 public class BeatBoxFinal {
 
@@ -24,6 +24,9 @@ public class BeatBoxFinal {
     String userName;
     int nextNum;
     JTextField userMessage;
+    JList incomingList;
+    Vector<String> listVector = new Vector<String>();
+    HashMap<String, boolean[]> otherSeqsMap = new HashMap<String, boolean[]>();
 
     String[] instrumentNames = {"Bass Drum", "Closed Hi-Hat", "Open Hi-Hat", "Acoustic Snare", "Crash Cymbal", "Hand Clap", "High Tom", "Hi Bongo", "Maracas", "Whistle", "Low Conga", "Cowbell", "Vibraslap", "Low-mid Tom", "High Agogo", "Open Hi Conga"};
     int [] instruments = {35, 42, 46, 38, 49, 39, 50, 60, 70, 72, 64, 56, 58, 47, 67, 63};
@@ -45,7 +48,7 @@ public class BeatBoxFinal {
         setUpMidi();
         buildGUI();
     }
-    
+
     // TODO
     public void buildGUI() {
         theFrame = new JFrame("Final Beatbox");
@@ -193,8 +196,26 @@ public class BeatBoxFinal {
 
     // TODO
     public class MyListSelectionListener implements ActionListener {}
-    // TODO
-    public class RemoteReader implements Runnable {}
+    
+    public class RemoteReader implements Runnable {
+        boolean[] checkboxState = null;
+        String nameToShow = null;
+        Object obj = null;
+        public void run() {
+            try {
+                while ((obj = in.readObject()) != null) {
+                    System.out.println("Received an object from the Server.");
+                    System.out.println(obj.getClass());
+                    String nameToShow = (String) obj;
+                    checkboxState = (boolean[]) in.readObject();
+                    otherSeqsMap.put(nameToShow, checkboxState);
+                    listVector.add(nameToShow);
+                    incomingList.setListData(listVector);
+                }
+            } catch(Exception ex) { ex.printStackTrace(); }
+        }
+    }
+
     // TODO
     public class MyPlayMineListener implements ActionListener {}
     // TODO
