@@ -26,10 +26,11 @@ public class BeatBoxFinal {
 
     String[] instrumentNames = {"Bass Drum", "Closed Hi-Hat", "Open Hi-Hat", "Acoustic Snare", "Crash Cymbal", "Hand Clap", "High Tom", "Hi Bongo", "Maracas", "Whistle", "Low Conga", "Cowbell", "Vibraslap", "Low-mid Tom", "High Agogo", "Open Hi Conga"};
     int [] instruments = {35, 42, 46, 38, 49, 39, 50, 60, 70, 72, 64, 56, 58, 47, 67, 63};
-
+    // TODO
     public static void main(String[] args) {}
+    // TODO
     public void startUp(String name) {}
-
+    // TODO
     public void buildGUI() {
         theFrame = new JFrame("Final Beatbox");
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,7 +57,9 @@ public class BeatBoxFinal {
         downTempo.addActionListener(new MyDownTempoListener());
         buttonBox.add(downTempo);
 
-        // new buttons here
+        JButton sendIt = new JButton("Send it");
+        sendIt.addActionListener(new MySendListener());
+        buttonBox.add(sendIt);
 
         Box nameBox = new Box(BoxLayout.Y_AXIS);
         for (int i = 0; i < 16; i++) {
@@ -169,10 +172,13 @@ public class BeatBoxFinal {
     }
 
 
-
+    // TODO
     public class MyListSelectionListener implements ActionListener {}
+    // TODO
     public class RemoteReader implements Runnable {}
+    // TODO
     public class MyPlayMineListener implements ActionListener {}
+    // TODO
     public void changeSequence() {}
 
 
