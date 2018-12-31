@@ -3,7 +3,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -32,8 +32,10 @@ public class BeatBoxFinal {
 
     String[] instrumentNames = {"Bass Drum", "Closed Hi-Hat", "Open Hi-Hat", "Acoustic Snare", "Crash Cymbal", "Hand Clap", "High Tom", "Hi Bongo", "Maracas", "Whistle", "Low Conga", "Cowbell", "Vibraslap", "Low-mid Tom", "High Agogo", "Open Hi Conga"};
     int [] instruments = {35, 42, 46, 38, 49, 39, 50, 60, 70, 72, 64, 56, 58, 47, 67, 63};
-    // TODO
-    public static void main(String[] args) {}
+
+    public static void main(String[] args) {
+        new BeatBoxFinal().startUp(args[0]); // your User ID
+    }
 
     public void startUp(String name) {
         userName = name;
@@ -51,7 +53,6 @@ public class BeatBoxFinal {
         buildGUI();
     }
 
-    // TODO
     public void buildGUI() {
         theFrame = new JFrame("Final Beatbox");
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -235,12 +236,23 @@ public class BeatBoxFinal {
         }
     }
 
-    // TODO
-    public class MyPlayMineListener implements ActionListener {}
-    // TODO
-    public void changeSequence(boolean[] checkboxState) {}
+    public class MyPlayMineListener implements ActionListener {
+        public void actionPerformed(ActionEvent a) {
+            if (mySequence != null) { sequence = mySequence; }
+        }
+    }
 
-
+    public void changeSequence(boolean[] checkboxState) {
+        for (int i = 0; i < 256; i++) {
+            JCheckBox check = (JCheckBox) checkboxList.get(i);
+            if (checkboxState[i]) {
+                check.setSelected(true);
+            } else {
+                check.setSelected(false);
+            }
+        }
+    }
+    
     public void makeTracks(ArrayList list) {
         Iterator it = list.iterator();
         for (int i = 0; i < 16; i++) {
