@@ -1,5 +1,7 @@
 import javax.sound.midi.*;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.ObjectInputStream;
@@ -193,10 +195,20 @@ public class BeatBoxFinal {
         }
     }
 
+    public class MyListSelectionListener implements ListSelectionListener {
+        public void valueChanged(ListSelectionEvent le) {
+            if (!le.getValueIsAdjusting()) {
+                String selected = (String) incomingList.getSelectedValue();
+                if (selected != null) {
+                    boolean[] selectedState = (boolean[]) otherSeqsMap.get(selected);
+                    changeSequence(selectedState);
+                    sequencer.stop();
+                    buildTrackAndStart();
+                }
+            }
+        }
+    }
 
-    // TODO
-    public class MyListSelectionListener implements ActionListener {}
-    
     public class RemoteReader implements Runnable {
         boolean[] checkboxState = null;
         String nameToShow = null;
@@ -219,7 +231,7 @@ public class BeatBoxFinal {
     // TODO
     public class MyPlayMineListener implements ActionListener {}
     // TODO
-    public void changeSequence() {}
+    public void changeSequence(boolean[] checkboxState) {}
 
 
     public void makeTracks(ArrayList list) {
