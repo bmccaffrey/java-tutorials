@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -28,8 +29,23 @@ public class BeatBoxFinal {
     int [] instruments = {35, 42, 46, 38, 49, 39, 50, 60, 70, 72, 64, 56, 58, 47, 67, 63};
     // TODO
     public static void main(String[] args) {}
-    // TODO
-    public void startUp(String name) {}
+
+    public void startUp(String name) {
+        userName = name;
+        try {
+            Socket sock = new Socket("127.0.0.1", 4242);
+            out = new ObjectOutputStream(sock.getOutputStream());
+            in = new ObjectInputStream(sock.getInputStream());
+            Thread remote = new Thread(new RemoteReader());
+            remote.start();
+        } catch (Exception ex) {
+            System.out.println("Unable to establish a connection.");
+            ex.printStackTrace();
+        }
+        setUpMidi();
+        buildGUI();
+    }
+    
     // TODO
     public void buildGUI() {
         theFrame = new JFrame("Final Beatbox");
@@ -63,7 +79,7 @@ public class BeatBoxFinal {
 
         userMessage = new JTextField();
         buttonBox.add(userMessage);
-        
+
         Box nameBox = new Box(BoxLayout.Y_AXIS);
         for (int i = 0; i < 16; i++) {
             nameBox.add(new Label(instrumentNames[i]));
