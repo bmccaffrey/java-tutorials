@@ -61,6 +61,9 @@ public class BeatBoxFinal {
         sendIt.addActionListener(new MySendListener());
         buttonBox.add(sendIt);
 
+        userMessage = new JTextField();
+        buttonBox.add(userMessage);
+        
         Box nameBox = new Box(BoxLayout.Y_AXIS);
         for (int i = 0; i < 16; i++) {
             nameBox.add(new Label(instrumentNames[i]));
