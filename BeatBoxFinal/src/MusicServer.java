@@ -1,5 +1,6 @@
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,7 +9,9 @@ public class MusicServer {
 
     ArrayList<ObjectOutputStream> clientOutputStreams;
 
-    public static void main(String[] args) {}
+    public static void main(String[] args) {
+        new MusicServer().start();
+    }
 
     public class ClientHandler implements Runnable{
         ObjectInputStream in;
@@ -33,7 +36,23 @@ public class MusicServer {
         }
     }
 
-    public void start() {}
+    public void start() {
+        clientOutputStreams = new ArrayList<ObjectOutputStream>();
+        try {
+            ServerSocket serverSock = new ServerSocket(4242);
+            while (true) {
+                Socket clientSocket = serverSock.accept();
+                ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
+                clientOutputStreams.add(out);
+
+                Thread t = new Thread(new ClientHandler(clientSocket));
+                t.start();
+                System.out.println("Connection received.");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public void updateClients(Object one, Object two) {
         Iterator it = clientOutputStreams.iterator();
